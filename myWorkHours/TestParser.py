@@ -16,7 +16,7 @@ class TestParser(unittest.TestCase):
         eventDate = datetime.strptime("8.7.2013 8:12:27", "%d.%m.%Y %H:%M:%S")
         parsedEvent = Parser.parse_from_str(eventLine)
         self.assertEqual(eventDate, parsedEvent.datetime, "The parsed datetime should be correct")
-        self.assertEqual(eventType, parsedEvent.type, "The parsed event type should be correct")
+        self.assertEqual(eventType, parsedEvent.eventType, "The parsed event type should be correct")
 
     def test_parser_should_rise_exception_bad_format(self):
         eventLine = "8fsfdsfsd1.2.2113 8:12:fds27 fdsPřífsfsěžný průchodf"
@@ -28,8 +28,8 @@ class TestParser(unittest.TestCase):
         eventEx = "8.7.2013 11:24:01     Odchod <   Lunch"
         parsedArr = Parser.parse_from_str(eventArr)
         parsedEx = Parser.parse_from_str(eventEx)
-        self.assertEqual(parsedArr.type, EventTypes.ARRIVAL, "Arrival event should have a type of Arrival")
-        self.assertEqual(parsedEx.type, EventTypes.EXIT, "Exit event should have a type of Exit")
+        self.assertEqual(parsedArr.eventType, EventTypes.ARRIVAL, "Arrival event should have a type of Arrival")
+        self.assertEqual(parsedEx.eventType, EventTypes.EXIT, "Exit event should have a type of Exit")
 
     def test_parser_should_raise_exception_bad_datetime_format(self):
         eventLine = "81.2.2113 8:12:27   Příchod >   běžný průchod"
