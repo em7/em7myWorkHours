@@ -11,7 +11,8 @@ class TestParser(unittest.TestCase):
     '''
 
     def test_parser_should_parse_testcase(self):
-        eventLine = "8.7.2013 8:12:27   Příchod >   běžný průchod"
+        #eventLine = "8.7.2013 8:12:27   Příchod >   běžný průchod" #this is how it looks like normally
+        eventLine = "8.7.2013 8:12:27Príchod >bezny pruchod" #this is how it looks like fucked up in Windows console
         eventType = EventTypes.ARRIVAL
         eventDate = datetime.strptime("8.7.2013 8:12:27", "%d.%m.%Y %H:%M:%S")
         parsedEvent = Parser.parse_from_str(eventLine)
