@@ -9,7 +9,7 @@ class EventTypes(object):
     ARRIVAL = 1
     """ The constant for arrival event type """
 
-    EXIT = 2
+    LEAVE = 2
     """ The constant for exit event type """
 
 class Event(object):

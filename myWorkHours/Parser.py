@@ -35,7 +35,7 @@ def parse_from_str(eventLine):
 
     eventType = 0
     if groups[1] == ">": eventType = EventTypes.ARRIVAL
-    if groups[1] == "<": eventType = EventTypes.EXIT
+    if groups[1] == "<": eventType = EventTypes.LEAVE
 
     if eventType == 0:
         raise Exception("Could not parse an eventLine. The sign which determines the type was not correct: " + groups[1])

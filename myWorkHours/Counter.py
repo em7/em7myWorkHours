@@ -1,5 +1,4 @@
 
-
 __author__ = 'eMko'
 """ Module for counting the time between events """
 
@@ -14,7 +13,7 @@ def difference(event1, event2):
     """
      Counts the time difference between event1 and event2. The time difference
      is equal to timedelta between the times when the events occur if the
-     event of type ARRIVAL is before EXIT. If EXIT is before ARRIVAL, then the
+     event of type ARRIVAL is before LEAVE. If LEAVE is before ARRIVAL, then the
      result is 0
 
      If both of the events have the same type, the InvalidEventTypeOrderException
@@ -25,15 +24,20 @@ def difference(event1, event2):
 
      @param event1 Event the first event
      @param event2 Event the second event
+
+     @type event1 Event
+     @type event2 Event
     """
+    assert isinstance(event1, Event)
+    assert isinstance(event1, Event)
 
     if event1.eventType == event2.eventType:
-        raise InvalidEventTypeOrderException("The both events have the same type, which is not valid. Should be altering EXIT and ARRIVAL.")
+        raise InvalidEventTypeOrderException("The both events have the same type, which is not valid. Should be altering LEAVE and ARRIVAL.")
 
     if event2.datetime < event1.datetime:
         raise InvalidEventOverlapException("The event2 is before the event1.")
 
-    if event1.eventType == EventTypes.EXIT and event2.eventType == EventTypes.ARRIVAL:
+    if event1.eventType == EventTypes.LEAVE and event2.eventType == EventTypes.ARRIVAL:
         return timedelta(0)
 
     delta = event2.datetime - event1.datetime
@@ -42,7 +46,7 @@ def difference(event1, event2):
 
 def count_event_list(events):
     """
-     Counts the time between events of ARRIVAL type and the EXIT type, leaving the gaps between EXIT and ARRIVAL.
+     Counts the time between events of ARRIVAL type and the LEAVE type, leaving the gaps between LEAVE and ARRIVAL.
 
      If the events are not Iterable, the Exception is raised.
 
@@ -55,6 +59,7 @@ def count_event_list(events):
      is raised.
 
      @param events the list of Events to count
+     @type events list of Event
      @returns datetime.timedelta with difference between the events
     """
 
@@ -75,9 +80,9 @@ def count_event_list(events):
         acc = acc + delta
         previous_event = event
 
-    #if the EXIT event is not as last, do the approximation
-    if events[-1].eventType != EventTypes.EXIT:
-        lastFakeEvt = Event(datetime.now(), EventTypes.EXIT)
+    #if the LEAVE event is not as last, do the approximation
+    if events[-1].eventType != EventTypes.LEAVE:
+        lastFakeEvt = Event(datetime.now(), EventTypes.LEAVE)
         delta = difference(previous_event, lastFakeEvt)
         acc = acc + delta
 
