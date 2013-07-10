@@ -1,4 +1,3 @@
-
 __author__ = 'eMko'
 """ Module for counting the time between events """
 
@@ -67,7 +66,8 @@ def count_event_list(events):
         raise Exception("The events should be a iterable with events")
 
     if len(events) < 2:
-        raise InsufficientEventsException("There should be at least 2 events in the list")
+        if not (len(events) == 1 and events[0].eventType == EventTypes.ARRIVAL):
+	        raise InsufficientEventsException("There should be at least 2 events in the list")
 
     if events[0].eventType != EventTypes.ARRIVAL:
         raise InvalidEventTypeOrderException("The ARRIVAL event should be first.")
