@@ -63,9 +63,15 @@ class TestCounter(unittest.TestCase):
                                "If the LEAVE event is not last, the now datetime should be used as approximation",
                                timedelta(0, 2))
 
-    def test_count_events_list_at_last_two(self):
+    def test_count_events_list_at_last_two_and_only_is_not_arrival(self):
         with self.assertRaises(InsufficientEventsException):
+            Counter.count_event_list([Event(datetime(2012,1,5,7,15,25), EventTypes.LEAVE)])
+    		
+    def test_count_events_list_not_raise_when_only_event_is_arrive(self):
+        try:
             Counter.count_event_list([Event(datetime(2012,1,5,7,15,25), EventTypes.ARRIVAL)])
+        except InsufficientEventsException:
+            self.fail("The count_events should not raise InsufficientEventsException when has one event and is type of ARRIVAL")
 
     def test_count_events_list_arrival_first(self):
         with self.assertRaises(InvalidEventTypeOrderException):
