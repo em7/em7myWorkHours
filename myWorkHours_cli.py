@@ -17,6 +17,8 @@ def print_help():
     """
     print("""myWorkHours_cli is a CLI for a program for counting the
 time spent in work. Uses the format used by WebTerm software.
+version 1.1
+distributed under the terms and conditions of WTFPL www.wtfpl.net
 
 usage: myWork [arg]
 where: arg can be   -h or --help or /? for this help
