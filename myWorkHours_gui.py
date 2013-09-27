@@ -40,7 +40,7 @@ class MyWorkHoursAboutWin(ttk.Frame):
         
         self.close_btn = ttk.Button(self)
         self.close_btn["text"] = "Close"
-        self.close_btn["command"] = root.destroy
+        self.close_btn["command"] = self.master.destroy
         self.close_btn.grid(row=3, column=0, sticky='S')
         
 
@@ -48,7 +48,7 @@ class MyWorkHoursMainWin(ttk.Frame):
     def __init__(self, master=None):
         ttk.Frame.__init__(self, master)
         if not (self.master == None):
-            self.master.title("Hello")
+            self.master.title("My Work Hours")
             self.master.minsize(450, 300)
             
         self.pack(fill='both', expand='yes', padx=5, pady=5)
